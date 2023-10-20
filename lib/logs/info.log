@@ -1,0 +1,64 @@
+13:32:41.596 [info] DivisionApp.divide [ Division by zero ] [params: [2, 0]]
+13:32:41.596 [error] [%FC.Error{error_text: "Division by zero", status: :bad_request, domain: "DivisionApp.divide", description: "[Division by zero][params: [2, 0]]"}]["DivisionApp.divide"]
+14:38:30.327 [info] Starting a new BankAccount GenServer with initial balance: 1000
+14:38:30.327 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: Kevin Savings with amount: 1000 ] [params: ["Kevin Savings", 1000]]
+14:40:26.331 [info] Starting a new BankAccount GenServer with initial balance: 1000
+14:40:26.331 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: Elixir.Kevin with amount: 1000 ] [params: [Kevin, 1000]]
+04:48:53.079 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: p with amount: 1000 ] [params: ["p", 1000]]
+05:00:24.719 [info] Bank Account started [ New Account for p with amount 1000 ] [params: ["p", 1000]]
+05:00:24.731 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: p with amount: 1000 ] [params: ["p", 1000]]
+05:16:31.843 [info] Bank Account started [ New Account for p with amount 1000 ] [params: ["p", 1000]][ business ]
+05:16:31.862 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: p with amount: 1000 ] [params: ["p", 1000]]
+15:25:37.446 [info] Bank Account started [ New Account for Hello with amount 1000 ] [params: ["Hello", 1000]][ business ]
+15:25:37.452 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: Hello with amount: 1000 ] [params: ["Hello", 1000]]
+15:26:49.595 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:26:49.603 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:27:05.425 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:27:05.425 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:27:56.158 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:27:56.167 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:27:56.168 [info] Bank Account started
+15:32:32.215 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:32:32.221 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:32:32.221 [info] Bank Account started
+15:35:43.979 [info] Bank Account started [ New Account for K with amount 10000 ] [params: ["K", 10000]][ business ]
+15:35:43.983 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 10000 ] [params: ["K", 10000]]
+15:35:43.983 [info] Bank Account started
+15:37:40.522 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:37:40.531 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:40:11.586 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:40:11.596 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:40:11.596 [info] Bank Account started
+15:42:05.863 [info] Bank Account started [ New Account for p with amount 1000 ] [params: ["p", 1000]][ business ]
+15:42:05.870 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: p with amount: 1000 ] [params: ["p", 1000]]
+15:42:05.871 [info] Bank Account started
+15:47:11.421 [info] Bank Account started [ New Account for K with amount 1000 ] [params: ["K", 1000]][ business ]
+15:47:11.426 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: K with amount: 1000 ] [params: ["K", 1000]]
+15:47:11.426 [info] Bank Account started
+15:54:43.588 [info] Bank Account started [ New Account for O with amount 10000 ] [params: ["O", 10000]][ business ]
+15:54:43.592 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: O with amount: 10000 ] [params: ["O", 10000]]
+15:54:43.592 [info] Bank Account started
+16:05:24.778 [info] Bank Account started [ New Account for O with amount 1000 ] [params: ["O", 1000]][ business ]
+16:05:24.782 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: O with amount: 1000 ] [params: ["O", 1000]]
+16:05:24.782 [info] Bank Account started
+21:00:39.802 [info] Bank Account started [ New Account for l with amount 1000 ] [params: ["l", 1000]][ business ]
+21:00:39.824 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: l with amount: 1000 ] [params: ["l", 1000]]
+21:00:39.825 [info] Bank Account started
+21:39:38.166 [info] Bank Account [ New Account for Acc1 with amount 1000 ] [params: ["Acc1", 1000]][ business ]
+21:39:38.189 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: Acc1 with amount: 1000 ] [params: ["Acc1", 1000]]
+21:39:38.190 [info] Bank Account started
+21:40:02.271 [warn] Attempt to withdraw with insufficient funds.
+21:40:02.271 [error] Withdrawal failed: Insufficient funds
+21:40:02.272 [info] BankAccount.withdraw [ Withdrawal failed ] [params: [amount: 2000]]
+08:46:28.511 [warn] Attempt to withdraw with insufficient funds.
+08:46:28.513 [error] Withdrawal failed: Insufficient funds
+08:46:28.514 [info] BankAccount.withdraw [ Withdrawal failed ] [params: [amount: 2000]]
+08:47:48.607 [warn] Attempt to withdraw with insufficient funds.
+08:47:48.608 [error] Withdrawal failed: Insufficient funds
+08:47:48.608 [info] BankAccount.withdraw [ Withdrawal failed ] [params: [amount: 2000]]
+08:59:12.331 [info] Bank Account [ New Account for OK with amount 1000 ] [params: ["OK", 1000]][ business ]
+08:59:12.356 [info] BankAccount.startlink() [ Successfully started BankAccount Genserver for account: OK with amount: 1000 ] [params: ["OK", 1000]]
+08:59:12.356 [info] Bank Account started
+08:59:29.529 [warn] Attempt to withdraw with insufficient funds.
+08:59:29.530 [error] Withdrawal failed: Insufficient funds
+08:59:29.530 [info] BankAccount.withdraw [ Withdrawal failed ] [params: [amount: 2000]]
