@@ -1,7 +1,7 @@
 defmodule LogProducer do
   require Logger
 
-    @log_levels [:debug, :info,  :error]
+    @log_levels [:debug, :info, :error, :alert, :emergency, :notice, :critical]
 
     def generate_random_logs(log_count) do
       Enum.each(1..log_count, fn _ ->
@@ -19,10 +19,10 @@ defmodule LogProducer do
       random_messages = [
         "A user submits a form.",
         "A user completes an action",
-        "A card’s content cannot be loaded",
-        "A user’s current session",
+        "A card's content cannot be loaded",
+        "A user's current session",
         "A system-related error occurs at random",
-        "A page’s content is inaccessible.",
+        "A page's content is inaccessible.",
         "A process that the user initiated."
       ]
       Enum.random(random_messages)
