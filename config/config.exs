@@ -10,6 +10,5 @@ config :logger, :console,
 
 config :logger, ExLogger,
   level: :debug,
-  producer_node: :"logproducer@localhost",
   sink_node: :"logsink@localhost",
   format: "$time [$level] $message $metadata\n"

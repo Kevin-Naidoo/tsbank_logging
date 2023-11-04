@@ -18,7 +18,7 @@ defmodule ExLogger do
     Application.put_env(:logger, __MODULE__, opts)
 
     level = Keyword.get(opts, :level)
-    producer_node = Keyword.get(opts, :producer_node)
+    producer_node = Node.self()
     sink_node = Keyword.get(opts, :sink_node)
     #topic = Keyword.get(opts, :topic)
     #metadata = Keyword.get(opts, :metadata)
@@ -57,7 +57,7 @@ defmodule ExLogger do
   end
 
 
-  defp log_to_sink(level, message, timestamp, %{producer_node: producer_node} = _state, metadata) do
+  defp log_to_sink(level, message, _timestamp, %{producer_node: producer_node} = _state, metadata) do
     message = flatten_message(message) |> Enum.join("\n")
     timestamp = DateTime.utc_now()
     formatted_string = DateTime.to_string(timestamp)
