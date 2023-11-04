@@ -1,7 +1,7 @@
 defmodule LogProducer do
   require Logger
 
-    @log_levels [:debug, :info, :error, :alert, :emergency, :notice, :critical]
+    @log_levels [:debug, :info, :error]
 
     def generate_random_logs(log_count) do
       Enum.each(1..log_count, fn _ ->

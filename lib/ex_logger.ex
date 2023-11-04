@@ -7,7 +7,7 @@ defmodule ExLogger do
   end
 
   defp configure(opts) do
-    state = %{level: nil, producer_node: nil, sink_node: nil, topic: nil}
+    state = %{level: nil, producer_node: nil, sink_node: nil}
     configure(opts, state)
   end
 
@@ -20,9 +20,10 @@ defmodule ExLogger do
     level = Keyword.get(opts, :level)
     producer_node = Keyword.get(opts, :producer_node)
     sink_node = Keyword.get(opts, :sink_node)
-    topic = Keyword.get(opts, :topic)
+    #topic = Keyword.get(opts, :topic)
+    #metadata = Keyword.get(opts, :metadata)
 
-    %{state | level: level, producer_node: producer_node, sink_node: sink_node, topic: topic}
+    %{state | level: level, producer_node: producer_node, sink_node: sink_node}
   end
 
   def event_call({:configure, opts}, state) do
@@ -34,11 +35,11 @@ defmodule ExLogger do
     {:ok, state}
   end
 
-  def handle_event({level, _gl, {Logger, msg, timestamps, _details}}, %{level: log_level} = state) do
+  def handle_event({level, _gl, {Logger, msg, timestamps, metadata}}, %{level: log_level} = state) do
     if meet_level?(level, log_level) do
 
       #:erpc.call(:"logsink@localhost", ExLogger, :log_to_sink, [level, msg, timestamps, state])
-      log_to_sink(level, msg, timestamps, state)
+      log_to_sink(level, msg, timestamps, state, metadata)
 
     end
 
@@ -56,14 +57,19 @@ defmodule ExLogger do
   end
 
 
-  defp log_to_sink(level, message, _timestamps, %{producer_node: producer_node} = _state) do
-    #IO.inspect(timestamps)
+  defp log_to_sink(level, message, timestamp, %{producer_node: producer_node} = _state, metadata) do
     message = flatten_message(message) |> Enum.join("\n")
     timestamp = DateTime.utc_now()
     formatted_string = DateTime.to_string(timestamp)
 
-    log_format = "#{producer_node} #{formatted_string} [#{level}] #{message}"
-    send(:global.whereis_name(:log_sink), log_format)
+    log_format = "#{producer_node} #{formatted_string} [#{level}] #{message} #{inspect(metadata)}"
+
+    case :global.whereis_name(:log_sink) do
+      :undefined -> undefined_pid()
+
+      _pid -> send(:global.whereis_name(:log_sink), log_format)
+    end
+
   end
 
   defp flatten_message(msg) do
@@ -71,5 +77,9 @@ defmodule ExLogger do
       [n | body] -> ["#{n}: #{body}"]
       _ -> [msg]
     end
+  end
+
+  defp undefined_pid do
+    IO.puts("Cannot find Log Sink")
   end
 end
