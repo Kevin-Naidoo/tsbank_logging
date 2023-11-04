@@ -38,7 +38,7 @@ defmodule ExLogger do
   def handle_event({level, _gl, {Logger, msg, timestamps, metadata}}, %{level: log_level} = state) do
     if meet_level?(level, log_level) do
 
-      #:erpc.call(:"logsink@localhost", ExLogger, :log_to_sink, [level, msg, timestamps, state])
+
       log_to_sink(level, msg, timestamps, state, metadata)
 
     end
@@ -64,13 +64,22 @@ defmodule ExLogger do
 
     log_format = "#{producer_node} #{formatted_string} [#{level}] #{message} #{inspect(metadata)}"
 
-    case :global.whereis_name(:log_sink) do
-      :undefined -> undefined_pid()
-
-      _pid -> send(:global.whereis_name(:log_sink), log_format)
-    end
+    #log_via_send(log_format)
+    log_via_rpc(:"logsink@localhost", LogGenServer,:log , [log_format])
 
   end
+
+  defp log_via_rpc(node, module, function, args) do
+    :erpc.cast(node, module, function, args)
+  end
+
+  # defp log_via_send(log_message) do
+  #    case :global.whereis_name(:log_sink) do
+  #     :undefined -> undefined_pid()
+
+  #     _pid -> send(:global.whereis_name(:log_sink), log_message)
+  #   end
+  # end
 
   defp flatten_message(msg) do
     case msg do
@@ -79,7 +88,7 @@ defmodule ExLogger do
     end
   end
 
-  defp undefined_pid do
-    IO.puts("Cannot find Log Sink")
-  end
+  # defp undefined_pid do
+  #   IO.puts("Cannot find Log Sink")
+  # end
 end
