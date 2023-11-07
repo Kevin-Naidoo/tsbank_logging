@@ -11,17 +11,14 @@ defmodule ExLogger do
     configure(opts, state)
   end
 
-
   defp configure(opts, state) do
+
     env = Application.get_env(:logger, __MODULE__, [])
     opts = Keyword.merge(env, opts)
     Application.put_env(:logger, __MODULE__, opts)
-
     level = Keyword.get(opts, :level)
     producer_node = Node.self()
     sink_node = Keyword.get(opts, :sink_node)
-    #topic = Keyword.get(opts, :topic)
-    #metadata = Keyword.get(opts, :metadata)
 
     %{state | level: level, producer_node: producer_node, sink_node: sink_node}
   end
@@ -30,7 +27,6 @@ defmodule ExLogger do
     {:ok, {:ok, configure(opts, state), configure(opts, state)}}
   end
 
-#gl - group leader
   def handle_event({_level, gl, {Logger, _, _, _}}, state) when node(gl) != node() do
     {:ok, state}
   end
@@ -38,11 +34,9 @@ defmodule ExLogger do
   def handle_event({level, _gl, {Logger, msg, timestamps, metadata}}, %{level: log_level} = state) do
     if meet_level?(level, log_level) do
 
-
       log_to_sink(level, msg, timestamps, state, metadata)
 
     end
-
     {:ok, state}
   end
 
@@ -56,8 +50,8 @@ defmodule ExLogger do
     Logger.compare_levels(lvl, min) != :lt
   end
 
-
   defp log_to_sink(level, message, _timestamp, %{producer_node: producer_node} = _state, metadata) do
+
     message = flatten_message(message) |> Enum.join("\n")
     timestamp = DateTime.utc_now()
     formatted_string = DateTime.to_string(timestamp)
@@ -65,6 +59,7 @@ defmodule ExLogger do
     log_format = "#{producer_node} #{formatted_string} [#{level}] #{message} #{inspect(metadata)}"
 
     #log_via_send(log_format)
+
     log_via_rpc(:"logsink@localhost", LogGenServer,:log , [log_format])
 
   end
