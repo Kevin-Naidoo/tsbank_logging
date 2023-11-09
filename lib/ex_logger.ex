@@ -50,7 +50,7 @@ defmodule ExLogger do
     Logger.compare_levels(lvl, min) != :lt
   end
 
-  defp log_to_sink(level, message, _timestamp, %{producer_node: producer_node} = _state, metadata) do
+  defp log_to_sink(level, message, _timestamp, %{producer_node: producer_node, sink_node: sink_node} = _state, metadata) do
 
     message = flatten_message(message) |> Enum.join("\n")
     timestamp = DateTime.utc_now()
@@ -60,7 +60,7 @@ defmodule ExLogger do
 
     #log_via_send(log_format)
 
-    log_via_rpc(:"logsink@localhost", LogGenServer,:log , [log_format])
+    log_via_rpc(sink_node, LogGenServer,:log , [log_format])
 
   end
 
