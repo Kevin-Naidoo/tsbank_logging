@@ -8,7 +8,9 @@ defmodule LogProducer do
         random_log_level = Enum.random(@log_levels)
         random_log = generate_random_log()
         log_with_level(random_log_level, random_log)
+        Metrics.count()
       end)
+
     end
 
     defp log_with_level(level, message) do
